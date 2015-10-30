@@ -1,0 +1,43 @@
+#N canvas 137 31 463 692 10;
+#X obj 93 107 grid grid1 200 0 127 200 0 127 1 1 1 10 10 120 152;
+#X obj 89 27 cnv 15 15 15 empty empty Let's_make_a_theremin! 4 12 0
+18 -262144 -66577 0;
+#X obj 89 56 cnv 15 15 15 empty empty (Amplitude_and_frequency) 4 12
+0 14 -262144 -66577 0;
+#X obj 53 191 cnv 15 15 15 empty empty Amp 4 12 0 14 -262144 -66577
+0;
+#X obj 173 311 cnv 15 15 15 empty empty Freq 4 12 0 14 -262144 -66577
+0;
+#N canvas 514 76 384 452 brainz 0;
+#X obj 40 52 inlet;
+#X obj 207 56 inlet;
+#X obj 135 399 outlet~;
+#X obj 135 338 *~;
+#X obj 207 187 line~;
+#X msg 207 152 \$1 20;
+#X obj 40 209 osc~;
+#X obj 40 178 line~;
+#X msg 40 145 \$1 50;
+#X obj 40 105 mtof;
+#X obj 207 92 expr pow($f1/127 \, 2);
+#X msg 254 279 \; pd dsp 1;
+#X obj 254 256 loadbang;
+#X connect 0 0 9 0;
+#X connect 1 0 10 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 0;
+#X connect 6 0 3 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 5 0;
+#X connect 12 0 11 0;
+#X restore 93 356 pd brainz;
+#X obj 93 385 s-out~ /out;
+#X obj 93 445 Scope~ 221 191 256 3 128 -1 1 0 0 0 0 102 255 51 135
+135 135 0;
+#X connect 0 0 5 0;
+#X connect 0 1 5 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;

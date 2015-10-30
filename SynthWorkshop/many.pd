@@ -1,0 +1,107 @@
+#N canvas 240 58 1032 560 10;
+#X obj 614 470 outlet~;
+#X obj 711 294 r \$1/main;
+#X obj 711 326 dbtorms;
+#X obj 614 438 *~;
+#X msg 711 355 \$1 20;
+#X obj 711 385 line~;
+#X obj 580 38 inlet note;
+#N canvas 614 317 450 300 lfo 0;
+#X obj 68 174 outlet~;
+#X obj 68 120 osc~ 1;
+#X obj 67 49 r \$1/lfo-freq;
+#X obj 67 86 expr pow($f1/127 \, 2)*20+.1;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X restore 817 124 pd lfo;
+#X obj 101 117 cnv 15 354 169 empty \$1/env-bg empty 6 12 0 14 -1 -1
+0;
+#X obj 102 118 cnv 15 116 111 empty \$1/env-bg Oscillators 6 12 0 14
+-4034 -1 0;
+#X obj 107 146 tgl 15 0 \$1/saw-on \$1/saw-on-r Saw 18 8 0 11 -262144
+-1 -1 1 1;
+#X obj 153 146 tgl 15 0 \$1/square-on \$1/square-on-r Square 18 8 0
+11 -262144 -1 -1 1 1;
+#X obj 220 118 cnv 15 116 167 empty \$1/env-bg Filter 6 12 0 14 -260097
+-1 0;
+#X obj 110 165 hsl 100 12 0 127 0 0 \$1/noise \$1/noise-r Noise 4 7
+0 11 -262144 -1 -1 0 1;
+#X obj 110 180 hsl 100 12 0 127 0 0 \$1/lfo-osc \$1/lfo-osc-r LFO 4
+7 0 11 -262144 -1 -1 0 1;
+#X obj 228 202 hsl 100 12 0 127 0 0 \$1/lfo-filt \$1/lfo-filt-r LFO
+4 7 0 11 -262144 -1 -1 2400 1;
+#X obj 228 157 hsl 100 12 0 127 0 0 \$1/resonance \$1/resonance-r Resonance
+4 7 0 11 -262144 -1 -1 0 1;
+#X obj 228 142 hsl 100 12 0 127 0 0 \$1/cutoff \$1/cutoff-r Cutoff
+4 7 0 11 -262144 -1 -1 4600 1;
+#X obj 228 187 hsl 100 12 0 127 0 0 \$1/f-env \$1/f-env-r Envelope
+4 7 0 11 -262144 -1 -1 0 1;
+#X obj 228 172 hsl 100 12 0 127 0 0 \$1/trk \$1/trk-r Tracking 4 7
+0 11 -262144 -1 -1 4000 1;
+#X obj 102 231 cnv 15 116 54 empty \$1/env-bg LFO 6 12 0 14 -257985
+-1 0;
+#X obj 109 254 hsl 100 12 0 127 0 0 \$1/lfo-freq \$1/lfo-freq-r Frequency
+4 7 0 11 -262144 -1 -1 5700 1;
+#X obj 109 269 hsl 100 12 0 127 0 0 \$1/lfo-del \$1/lfo-del-r Delay
+4 7 0 11 -262144 -1 -1 4000 1;
+#X obj 338 157 cnv 15 116 128 empty \$1/env-bg Amplifier 6 12 0 14
+-260097 -1 0;
+#X obj 346 180 hsl 100 26 0 127 0 0 \$1/main \$1/main-r Volume 6 13
+0 14 -257985 -1 -1 6500 1;
+#X obj 338 118 cnv 15 116 37 empty empty Let's 6 10 0 11 -4032 -1 0
+;
+#X obj 384 118 cnv 15 15 15 empty empty build 6 10 0 11 -4032 -1 0
+;
+#X obj 338 134 cnv 15 15 15 empty empty a 6 10 0 11 -4032 -1 0;
+#X obj 354 134 cnv 15 15 15 empty empty polysynth! 6 10 0 11 -4032
+-1 0;
+#X obj 110 195 hsl 100 12 0 127 0 0 \$1/pwm \$1/pwm-r PWM 4 7 0 11
+-262144 -1 -1 0 1;
+#X obj 223 220 d_env-g \$1/filt;
+#X obj 341 220 d_env-g \$1/amp;
+#X obj 580 74 poly 6 1;
+#X obj 580 98 pack f f f;
+#X obj 580 124 route 1 2 3 4 5 6;
+#X obj 700 154 many-voice \$1 1;
+#X obj 107 211 hradio 15 1 0 3 \$1/octave \$1/octave-r Octave 50 8
+0 10 -262144 -1 -1 1;
+#X obj 149 394 loadbang;
+#X msg 149 420 1;
+#X obj 149 446 s \$1/octave-r;
+#X obj 700 174 many-voice \$1 2;
+#X obj 700 194 many-voice \$1 3;
+#X obj 700 214 many-voice \$1 4;
+#X obj 700 234 many-voice \$1 5;
+#X obj 700 254 many-voice \$1 6;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 1;
+#X connect 6 0 32 0;
+#X connect 7 0 35 1;
+#X connect 7 0 40 1;
+#X connect 7 0 41 1;
+#X connect 7 0 42 1;
+#X connect 7 0 43 1;
+#X connect 7 0 44 1;
+#X connect 32 0 33 0;
+#X connect 32 1 33 1;
+#X connect 32 2 33 2;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 34 1 40 0;
+#X connect 34 2 41 0;
+#X connect 34 3 42 0;
+#X connect 34 4 43 0;
+#X connect 34 5 44 0;
+#X connect 35 0 3 0;
+#X connect 37 0 38 0;
+#X connect 38 0 39 0;
+#X connect 40 0 3 0;
+#X connect 41 0 3 0;
+#X connect 42 0 3 0;
+#X connect 43 0 3 0;
+#X connect 44 0 3 0;
+#X coords 0 -1 1 1 356 188 1 100 100;

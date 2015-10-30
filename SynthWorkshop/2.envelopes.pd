@@ -1,0 +1,112 @@
+#N canvas 137 31 907 631 10;
+#X obj 89 27 cnv 15 15 15 empty empty Let's_play_with_envelopes! 4
+12 0 18 -262144 -66577 0;
+#N canvas 188 67 479 602 envelope 0;
+#X msg 363 363 \; pd dsp 1;
+#X obj 363 340 loadbang;
+#X obj 233 421 vline~;
+#X msg 233 390 1 \$1 \, 0 \$2 \$1;
+#X obj 233 456 expr~ pow($v1 \, 2);
+#X obj 139 427 osc~ 440;
+#X obj 139 372 mtof;
+#X obj 232 353 pack f f;
+#X obj 232 313 f;
+#X obj 108 159 nbx 4 20 0 1e+37 0 0 empty empty Attack(ms) 75 11 0
+16 -262144 -1 -1 10 256;
+#X obj 108 189 nbx 4 20 0 1e+37 0 0 empty empty Decay(ms) 75 11 0 16
+-262144 -1 -1 1000 256;
+#X obj 108 128 nbx 4 20 0 1e+37 0 0 empty empty Note 75 11 0 16 -262144
+-1 -1 60 256;
+#X obj 302 129 bng 80 250 50 0 empty empty Go! 17 39 0 30 -4034 -1
+-1;
+#X obj 189 548 outlet~;
+#X obj 189 516 *~;
+#X obj 35 28 loadbang;
+#X msg 35 54 60 10 1000;
+#X obj 35 79 unpack f f f;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 14 1;
+#X connect 5 0 14 0;
+#X connect 6 0 5 0;
+#X connect 7 0 3 0;
+#X connect 8 0 7 0;
+#X connect 9 0 8 1;
+#X connect 10 0 7 1;
+#X connect 11 0 6 0;
+#X connect 12 0 8 0;
+#X connect 14 0 13 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 11 0;
+#X connect 17 1 9 0;
+#X connect 17 2 10 0;
+#X coords 0 -1 1 1 300 120 1 100 100;
+#X restore 90 95 pd envelope machine the first;
+#N canvas 371 22 788 680 envelope 0;
+#X msg 592 432 \; pd dsp 1;
+#X obj 592 409 loadbang;
+#X obj 230 479 vline~;
+#X obj 230 514 expr~ pow($v1 \, 2);
+#X obj 136 485 osc~ 440;
+#X obj 136 430 mtof;
+#X obj 229 371 f;
+#X obj 108 159 nbx 4 20 0 1e+37 0 0 empty empty Attack 75 11 0 16 -262144
+-1 -1 329 256;
+#X obj 108 189 nbx 4 20 0 1e+37 0 0 empty empty Decay 75 11 0 16 -262144
+-1 -1 188 256;
+#X obj 186 606 outlet~;
+#X obj 186 574 *~;
+#X obj 108 219 nbx 4 20 0 100 0 0 empty empty Sustain(%) 75 11 0 16
+-262144 -1 -1 50 256;
+#X obj 108 249 nbx 4 20 0 1e+37 0 0 empty empty Release 75 11 0 16
+-262144 -1 -1 3000 256;
+#X obj 229 411 pack f f f;
+#X obj 249 313 sel 1 0;
+#X obj 286 373 / 100;
+#X obj 108 128 nbx 4 20 0 1e+37 0 0 empty empty Note 75 11 0 16 -262144
+-1 -1 60 256;
+#X obj 302 129 tgl 80 0 empty empty On! 17 39 0 30 -257985 -1 -1 0
+1;
+#X msg 230 448 0 0 \, 1 \$1 0 \, \$3 \$2 \$1;
+#X msg 375 447 0 \$1;
+#X obj 375 382 f;
+#X obj 52 14 loadbang;
+#X msg 52 39 60 10 100 50 3000;
+#X obj 52 67 unpack f f f f f;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 10 1;
+#X connect 4 0 10 0;
+#X connect 5 0 4 0;
+#X connect 6 0 13 0;
+#X connect 7 0 6 1;
+#X connect 8 0 13 1;
+#X connect 10 0 9 0;
+#X connect 11 0 15 0;
+#X connect 12 0 20 1;
+#X connect 13 0 18 0;
+#X connect 14 0 6 0;
+#X connect 14 1 20 0;
+#X connect 15 0 13 2;
+#X connect 16 0 5 0;
+#X connect 17 0 14 0;
+#X connect 18 0 2 0;
+#X connect 19 0 2 0;
+#X connect 20 0 19 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 16 0;
+#X connect 23 1 7 0;
+#X connect 23 2 8 0;
+#X connect 23 3 11 0;
+#X connect 23 4 12 0;
+#X coords 0 -1 1 1 300 180 1 100 100;
+#X restore 490 35 pd envelope machine the second;
+#X obj 323 295 s-out~ /out;
+#X obj 323 366 Scope~ 221 191 256 3 128 -1 1 0 0 0 0 102 255 51 135
+135 135 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;

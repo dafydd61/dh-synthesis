@@ -1,0 +1,27 @@
+#N canvas 59 34 1104 696 10;
+#X obj 59 47 cnv 15 15 15 empty empty Let's_build_a_synth_orchestra!
+4 12 0 18 -262144 -66577 0;
+#X obj 206 90 s-randomnotes;
+#X obj 800 178 metronome /m 4 4;
+#X obj 354 92 s-midiin 1;
+#X obj 60 149 many /lots;
+#X obj 427 149 one /bass;
+#X obj 196 415 one /kick;
+#X obj 571 415 one /hats;
+#X obj 571 389 offbeats;
+#X obj 196 366 four;
+#X obj 384 361 s-midiin 1;
+#X obj 196 610 s-out~ /drums;
+#X obj 60 352 s-out~ /out;
+#X connect 1 0 4 0;
+#X connect 1 1 5 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 11 0;
+#X connect 7 0 11 0;
+#X connect 8 0 7 0;
+#X connect 9 0 6 0;
+#X connect 10 0 6 0;
+#X connect 10 1 7 0;

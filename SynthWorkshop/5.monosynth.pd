@@ -1,0 +1,13 @@
+#N canvas 429 342 964 539 10;
+#X obj 59 47 cnv 15 15 15 empty empty Let's_build_a_synth! 4 12 0 18
+-262144 -66577 0;
+#X obj 60 87 s-randomnotes;
+#X obj 208 89 s-midiin 1;
+#X obj 60 149 one /s;
+#X obj 60 352 s-out~ /out;
+#X obj 382 14 s-keykey;
+#X obj 640 155 metronome /m 4 4;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 3 0;

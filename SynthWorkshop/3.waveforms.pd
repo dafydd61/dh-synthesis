@@ -1,0 +1,188 @@
+#N canvas 75 23 467 632 10;
+#X obj 12 9 cnv 15 420 18 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 12 200 cnv 15 420 380 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X floatatom 86 366 5 0 0 3 freq - 3.frequency;
+#X obj 24 232 vsl 15 128 0 1 0 0 empty 3.amplitude-set empty 0 -8 0
+8 -262144 -1 -1 5400 1;
+#X obj 24 210 tgl 15 0 audio_on empty audio_on 18 8 0 12 -262144 -1
+-1 1 1;
+#X obj 86 232 vsl 15 128 100 2000 0 0 empty 3.frequency-set empty 0
+-8 0 12 -262144 -1 -1 2373 1;
+#X floatatom 24 366 5 0 0 3 amp - 3.amplitude;
+#N canvas 0 22 454 304 (subpatch) 0;
+#X array display-03 110 float 0;
+#X coords 0 1 109 -1 200 140 1;
+#X restore 214 216 graph;
+#X text 229 360 time;
+#X text 179 327 amp;
+#X text 18 35 The tonal quality \, or timbre of a sound is dependent
+upon the shape of its waveform \, or its path between compression and
+rarefaction.;
+#X obj 25 417 vradio 15 1 0 4 3.waveform 3.waveform-set empty 0 -6
+0 8 -262144 -1 -1 3;
+#X text 42 417 sine;
+#X text 42 432 sawtooth;
+#X text 42 447 noise;
+#X text 42 461 drawit;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array drawit-03 110 float 0;
+#X coords 0 1 109 -1 200 140 1;
+#X restore 213 430 graph;
+#X text 212 386 draw a waveform here \,;
+#X text 212 402 then click redraw:;
+#X obj 25 484 bng 15 250 50 0 3.graphit empty redraw 18 8 0 12 -262144
+-1 -1;
+#N canvas 490 27 530 642 the_guts 0;
+#X obj 9 7 cnv 15 480 18 empty empty the_guts 4 8 0 14 -195568 -1 0
+;
+#N canvas 46 42 319 382 the_guts_you've_seen_before 0;
+#X obj 44 46 r audio_on;
+#X msg 73 112 \; pd dsp \$1;
+#X obj 44 81 t b f;
+#X obj 44 157 del 10;
+#X obj 42 244 loadbang;
+#X obj 42 264 del 10;
+#X obj 44 195 s 3.graphit;
+#X msg 42 285 \; pd dsp 0 \; 3.amplitude-set 1 \; 3.frequency-set 440
+\; 3.waveform-set 0 \;;
+#X connect 0 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 1 1 0;
+#X connect 3 0 6 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X restore 220 581 pd the_guts_you've_seen_before;
+#X obj 126 352 cnv 15 370 190 empty empty empty 20 12 0 14 -261681
+-66577 0;
+#X obj 39 75 cnv 15 420 150 empty empty empty 20 12 0 14 -261681 -66577
+0;
+#X obj 63 528 dac~;
+#X obj 61 318 line~;
+#X obj 63 506 *~ 0.2;
+#X obj 22 49 t b f;
+#X obj 63 446 *~;
+#X obj 31 259 t b f;
+#X obj 61 299 pack 0 10;
+#X obj 123 118 phasor~ 440;
+#X obj 53 118 osc~ 440;
+#X obj 123 200 *~;
+#X obj 53 156 *~;
+#X obj 180 522 s sine;
+#X obj 237 519 s saw;
+#X obj 295 519 s noise;
+#X obj 180 499 1;
+#X obj 207 499 0;
+#X obj 237 499 1;
+#X obj 264 499 0;
+#X obj 295 499 1;
+#X obj 322 499 0;
+#X obj 139 181 r saw;
+#X obj 69 137 r sine;
+#X obj 207 118 noise~;
+#X obj 207 156 *~;
+#X obj 224 137 r noise;
+#X obj 163 391 t b f;
+#X obj 134 430 del 10;
+#X obj 123 141 *~ 2;
+#X obj 123 162 -~ 1;
+#X obj 27 582 tabwrite~ display-03;
+#X text 126 94 each with its own volume control;
+#X text 242 360 from waveform selector radioboxes;
+#X text 312 390 send 1 (on) or 0 (off) to;
+#X text 312 402 volume controls on sound;
+#X text 312 414 generators;
+#X text 126 81 Four different sound generators \,;
+#X obj 225 416 sel 0 1 2 3;
+#X obj 354 499 1;
+#X obj 381 499 0;
+#X obj 354 519 s drawit;
+#X obj 282 157 *~;
+#X obj 299 138 r drawit;
+#N canvas 106 126 195 140 drawit 0;
+#X obj 16 76 tabread4~ drawit-03;
+#X obj 16 34 phasor~ 440;
+#X obj 16 55 *~ 110;
+#X obj 16 98 outlet~;
+#X obj 17 13 r 3.frequency;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 4 0 1 0;
+#X restore 283 118 pd drawit (see sampling;
+#X obj 22 31 r 3.frequency;
+#X obj 32 235 r 3.amplitude;
+#X obj 23 393 s 3.graphit;
+#X obj 163 360 r 3.waveform;
+#X obj 26 558 r 3.graphit;
+#X floatatom 144 264 5 0 0 0 - - -;
+#X obj 133 453 s 3.graphit;
+#X connect 5 0 8 0;
+#X connect 6 0 4 0;
+#X connect 6 0 4 1;
+#X connect 7 0 49 0;
+#X connect 7 1 11 0;
+#X connect 7 1 12 0;
+#X connect 8 0 6 0;
+#X connect 8 0 33 0;
+#X connect 9 0 49 0;
+#X connect 9 1 10 0;
+#X connect 10 0 5 0;
+#X connect 11 0 31 0;
+#X connect 12 0 14 0;
+#X connect 13 0 8 1;
+#X connect 14 0 8 1;
+#X connect 18 0 15 0;
+#X connect 19 0 15 0;
+#X connect 20 0 16 0;
+#X connect 21 0 16 0;
+#X connect 22 0 17 0;
+#X connect 23 0 17 0;
+#X connect 24 0 13 1;
+#X connect 25 0 14 1;
+#X connect 26 0 27 0;
+#X connect 27 0 8 1;
+#X connect 28 0 27 1;
+#X connect 29 0 30 0;
+#X connect 29 1 40 0;
+#X connect 30 0 53 0;
+#X connect 31 0 32 0;
+#X connect 32 0 13 0;
+#X connect 40 0 18 0;
+#X connect 40 0 21 0;
+#X connect 40 0 23 0;
+#X connect 40 0 42 0;
+#X connect 40 1 20 0;
+#X connect 40 1 19 0;
+#X connect 40 1 23 0;
+#X connect 40 1 42 0;
+#X connect 40 2 22 0;
+#X connect 40 2 19 0;
+#X connect 40 2 21 0;
+#X connect 40 2 42 0;
+#X connect 40 3 41 0;
+#X connect 40 3 23 0;
+#X connect 40 3 21 0;
+#X connect 40 3 19 0;
+#X connect 41 0 43 0;
+#X connect 42 0 43 0;
+#X connect 44 0 8 1;
+#X connect 45 0 44 1;
+#X connect 46 0 44 0;
+#X connect 47 0 7 0;
+#X connect 48 0 9 0;
+#X connect 48 0 52 0;
+#X connect 50 0 29 0;
+#X connect 51 0 33 0;
+#X restore 19 586 pd the_guts;
+#X text 18 10 Let's play with waveforms! (it looks like it sounds)
+;
+#X text 18 83 So far we've been dealing with a "sine" wave. This is
+a very pure sound. It's lovely and extremely useful \, but on its own
+it's limited.;
+#X text 18 131 A sawtooth wave contains a great deal more sonic information.
+;
+#X text 18 167 Noise is basically a random waveform.;
+#X connect 3 0 6 0;
+#X connect 5 0 2 0;
